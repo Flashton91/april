@@ -12,15 +12,11 @@ def driver(request):
     options = Options()
     options.page_load_strategy = 'normal'
     driver = webdriver.Chrome('/chromedriver', chrome_options=options)
-    try:
-        driver.get(Settings.baseurl + 'login')
-        element = functions.findec(driver, Locator.InputLogin)
-        element.send_keys(Settings.login)
-        element = functions.findec(driver, Locator.inputPassword)
-        element.send_keys(Settings.password)
-        element = functions.findec(driver, Locator.buttonIn)
-        element.click()
-    except:
-        driver.get(Settings.baseurl)
+    driver.maximize_window()
+    driver.get(Settings.baseurl + 'clear')
+    driver.get(Settings.baseurl + 'login')
+    functions.findec(driver, Locator.InputLogin, Settings.login)
+    functions.findec(driver, Locator.inputPassword, Settings.password)
+    functions.findec(driver, Locator.buttonIn, "PressElement")
     yield driver
     driver.quit()
