@@ -30,6 +30,8 @@ def findec(driver, locator, action):
         element.send_keys(Keys.UP)
         element.send_keys(Keys.ENTER)
         return driver
+    if action == "yon":
+        pass
     else:
         element.send_keys(action)
         return driver
@@ -72,32 +74,54 @@ def generateUserDataRnd():
     userData["passportSerial"] = str(random.randint(10, 99)) + str(random.randint(10, 99))
     userData["passportNumber"] = str(random.randint(100000, 999999))
     userData["placeTakePas"] = random.choice(placeTakePasList)
-    userData["dateTakePas"] = str(random.randint(10,29)) + str(random.randint(10,12)) + str(random.randint(1990,2000))
     userData["codDepTakePas"] = str(random.randint(100, 999)) + '-' + str(random.randint(100, 999))
     userData["zagranPassSeries"] = str(random.randint(10,99))
     userData["zagranPassNumber"] = str(random.randint(100, 999)) + str(random.randint(1000, 9999))
     userData["placeTakeZagran"] = random.choice(placeTakePasList)
-    userData["dateTakeZagran"] = str(random.randint(10,29)) + str(random.randint(10,12)) + str(random.randint(2015,2023))
-    userData["godenDateZagran"] = str(random.randint(10,29)) + str(random.randint(10,12)) + str(random.randint(2026, 2030))
     userData["personalCodesZagran"] = str(random.randint(100000, 999999))
     userData["NumberSvidOR"] = str(random.randint(100000, 999999))
     userData["placeSvidOR"] = random.choice(moJoinList)
-    userData["dateSvidOR"] = str(random.randint(10,29)) + str(random.randint(10,12)) + str(random.randint(1950,2000))
     userData["SNILS"] = random.choice(snilsList)
     userData["INN"] = str(random.randint(1000,9999)) + str(random.randint(1000,9999)) + str(random.randint(1000,9999))
-    userData["dateINN"] = str(random.randint(10,29)) + str(random.randint(10,12)) + str(random.randint(2015,2022))
     userData["seriaPolis"] = "860000" + str(random.randint(10000,99999)) + str(random.randint(10000,99999))
     userData["numberPolis"] = str(random.randint(10000,99999)) + str(random.randint(10000,99999)) + "123456"
-    userData["dataPolis"] = str(random.randint(10, 29)) + str(random.randint(10, 12)) + str(random.randint(2010, 2020))
     userData["numberVoennik"] = str(random.randint(10000, 99999)) + str(random.randint(10, 99))
     userData["vidNaJit"] = str(random.randint(10000, 99999)) + "12"
     userData["numRVidNaJit"] = "0" + str(random.randint(10000, 99999))
-
+    userData["godenDo"] = str(random.randint(10,29)) + str(random.randint(10,12)) + str(random.randint(2026, 2030))
+    userData["vidan"] = str(random.randint(10,29)) + str(random.randint(10,12)) + str(random.randint(1990,2018))
     return userData
 
-def clickOnCoordinate(driver,element,x,y):
-    ActionChains(driver).move_to_element_with_offset(element,x,y).click().perform()
+
+def createPatientDoc(driver, loc):
+    time.sleep(3)
+    findec(driver, Locator.docH3, "PressElement")
+    findec(driver, Locator.addNewDoc, "PressElement")
+    findec(driver, loc, "PressElement")
     return driver
+
+def savePatientDoctDoc(driver):
+    findec(driver, Locator.saveDoc, "PressElement")
+    try:
+        findec(driver, Locator.causeEdit, "Тест")
+        findec(driver, Locator.EditSave, "PressElement")
+        driver.refresh()
+    except:
+        driver.refresh()
+    return driver
+
+def yot(driver, loc):
+    try:
+        findec(driver, Locator.docH3, "PressElement")
+        findec(driver, loc, "TakeElement")
+        driver.refresh()
+        return True
+    except:
+        driver.refresh()
+        return False
+
+
+
 
 
 
