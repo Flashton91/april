@@ -3,16 +3,22 @@ import time
 
 from selenium import webdriver
 from selenium.common import TimeoutException
-from selenium.webdriver import Keys
+from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from data import Settings, Locator
 from selenium.webdriver.support import expected_conditions as EC
 
 def findec(driver, locator, action):
-    timeout = 15
-    element_present = EC.element_to_be_clickable((By.XPATH, locator))
-    element = WebDriverWait(driver, timeout).until(element_present)
+    try:
+        timeout = 20
+        element_present = EC.element_to_be_clickable((By.XPATH, locator))
+        element = WebDriverWait(driver, timeout).until(element_present)
+    except:
+        driver.refresh()
+        timeout = 60
+        element_present = EC.visibility_of_all_elements_located((By.XPATH, locator))
+        element = WebDriverWait(driver, timeout).until(element_present)
     if action == "PressElement":
         element.click()
         return driver
@@ -80,5 +86,22 @@ def generateUserDataRnd():
     userData["SNILS"] = random.choice(snilsList)
     userData["INN"] = str(random.randint(1000,9999)) + str(random.randint(1000,9999)) + str(random.randint(1000,9999))
     userData["dateINN"] = str(random.randint(10,29)) + str(random.randint(10,12)) + str(random.randint(2015,2022))
+    userData["seriaPolis"] = "860000" + str(random.randint(10000,99999)) + str(random.randint(10000,99999))
+    userData["numberPolis"] = str(random.randint(10000,99999)) + str(random.randint(10000,99999)) + "123456"
+    userData["dataPolis"] = str(random.randint(10, 29)) + str(random.randint(10, 12)) + str(random.randint(2010, 2020))
+    userData["numberVoennik"] = str(random.randint(10000, 99999)) + str(random.randint(10, 99))
+    userData["vidNaJit"] = str(random.randint(10000, 99999)) + "12"
+    userData["numRVidNaJit"] = "0" + str(random.randint(10000, 99999))
+
     return userData
+
+def clickOnCoordinate(driver,element,x,y):
+    ActionChains(driver).move_to_element_with_offset(element,x,y).click().perform()
+    return driver
+
+
+
+
+
+
 

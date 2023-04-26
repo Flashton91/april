@@ -58,6 +58,20 @@ class Locator:
     svidORoj = " // p[ contains (text(), 'Свидетельство о рождении' ) ]"
     SNILS = "// p[ contains (text(), 'СНИЛС' ) ]"
     INN = "// p[ contains (text(), 'ИНН' ) ]"
+    Polis = "// p[ contains (text(), 'Полис ОМС' ) ]"
+    ListTypePolis = "// div[@id='policy_type_id'] // span[ contains (text(), 'Выбрать' ) ]"
+    SelectTypePolis = "// div[@id='policy_type_id'] // div[ contains (text(), 'Полис ОМС старого образца' ) ]"
+    companyPolisList = "// div[@class='full-width'] // input[@placeholder='Введите название']"
+    selectCompanyPolis = "//  div[@class='full-width'] // ul[@class='autocomplete-result-list'] / li"
+    voennik = "// p[ contains (text(), 'Военный билет' ) ]"
+    voennikSpec = "// textarea[@id='guards_specialty']"
+    vidNaJit = "// p[ contains (text(), 'Вид на жительство' ) ]"
+    numberReshVidNaJit = "// input[@id='decision_number']"
+    dataReshVidNaJit = "// input[@id='decision_date']"
+    godnoVidNaJit = "// input[@id='completion_date']"
+
+
+
 
 
 
